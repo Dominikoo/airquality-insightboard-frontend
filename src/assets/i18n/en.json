@@ -1,0 +1,22 @@
+{
+  "auth": {
+    "login": {
+      "title": "Sign in",
+      "subtitle": "Welcome back! Please sign in to continue.",
+      "email": {
+        "label": "Email",
+        "placeholder": "name@example.com",
+        "error": "Please enter a valid email address."
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "••••••••",
+        "error": "Password is required."
+      },
+      "submit": "Sign in",
+      "error": {
+        "invalidCredentials": "Incorrect email or password."
+      }
+    }
+  }
+}

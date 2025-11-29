@@ -1,0 +1,22 @@
+{
+  "auth": {
+    "login": {
+      "title": "Logowanie",
+      "subtitle": "Witaj ponownie! Zaloguj się, aby kontynuować.",
+      "email": {
+        "label": "Email",
+        "placeholder": "nazwa@przyklad.com",
+        "error": "Podaj poprawny adres email."
+      },
+      "password": {
+        "label": "Hasło",
+        "placeholder": "••••••••",
+        "error": "Hasło jest wymagane."
+      },
+      "submit": "Zaloguj się",
+      "error": {
+        "invalidCredentials": "Niepoprawny email lub hasło."
+      }
+    }
+  }
+}

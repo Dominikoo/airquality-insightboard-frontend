@@ -8,17 +8,19 @@ import {
 } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login-page',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, TranslatePipe],
   templateUrl: './login-page.html',
   styleUrl: './login-page.scss',
 })
 export class LoginPage {
   loading = false;
-  error?: string;
+  errorKey?: string;
+  currentLang = 'en';
 
   form = new FormGroup({
     email: new FormControl('', {
@@ -33,14 +35,17 @@ export class LoginPage {
 
   constructor(
     private auth: AuthService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private translate: TranslateService
+  ) {
+    this.currentLang = this.translate.currentLang || 'en';
+  }
 
   submit() {
     if (this.form.invalid) return;
 
     this.loading = true;
-    this.error = undefined;
+    this.errorKey = undefined;
 
     this.auth.login(this.form.getRawValue()).subscribe({
       next: () => {
@@ -49,8 +54,14 @@ export class LoginPage {
       },
       error: () => {
         this.loading = false;
-        this.error = 'Niepoprawny email lub hasło.';
+        this.errorKey = 'auth.login.error.invalidCredentials';
       },
     });
+  }
+
+  switchLang(lang: 'en' | 'pl') {
+    this.currentLang = lang;
+    this.translate.use(lang);
+    localStorage.setItem('lang', lang);
   }
 }

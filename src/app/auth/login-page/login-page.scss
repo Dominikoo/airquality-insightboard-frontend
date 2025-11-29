@@ -130,3 +130,31 @@ button {
   color: #dc2626;
   font-size: 0.9rem;
 }
+
+.lang-switcher {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.4rem;
+  margin-bottom: 0.6rem;
+
+  button {
+    border: none;
+    background: transparent;
+    padding: 0.25rem 0.55rem;
+    font-size: 0.8rem;
+    border-radius: 999px;
+    cursor: pointer;
+    color: #6b7280;
+    transition: 0.2s ease;
+
+    &.active {
+      background: #eef2ff;
+      color: #4338ca;
+      font-weight: 600;
+    }
+
+    &:hover:not(.active) {
+      background: #f3f4f6;
+    }
+  }
+}

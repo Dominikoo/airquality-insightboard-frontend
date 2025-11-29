@@ -2,45 +2,64 @@
   <div class="login-card">
 
     <div class="login-header">
-      <h1>Sign in</h1>
-      <p class="subtitle">Welcome back! Please sign in to continue.</p>
+      <div class="lang-switcher">
+        <button
+          type="button"
+          [class.active]="currentLang === 'en'"
+          (click)="switchLang('en')"
+        >
+          EN
+        </button>
+        <button
+          type="button"
+          [class.active]="currentLang === 'pl'"
+          (click)="switchLang('pl')"
+        >
+          PL
+        </button>
+      </div>
+
+      <h1>{{ 'auth.login.title' | translate }}</h1>
+      <p class="subtitle">{{ 'auth.login.subtitle' | translate }}</p>
     </div>
 
     <form [formGroup]="form" (ngSubmit)="submit()">
       <!-- Email -->
       <div class="form-control" [class.error]="form.controls.email.invalid && form.controls.email.touched">
-        <label for="email">Email</label>
+        <label for="email">{{ 'auth.login.email.label' | translate }}</label>
         <input
           id="email"
           type="email"
           formControlName="email"
-          placeholder="name@example.com"
+          [placeholder]="'auth.login.email.placeholder' | translate"
         />
         <span *ngIf="form.controls.email.invalid && form.controls.email.touched">
-          Please enter a valid email address.
+          {{ 'auth.login.email.error' | translate }}
         </span>
       </div>
 
       <!-- Password -->
       <div class="form-control" [class.error]="form.controls.password.invalid && form.controls.password.touched">
-        <label for="password">Password</label>
+        <label for="password">{{ 'auth.login.password.label' | translate }}</label>
         <input
           id="password"
           type="password"
           formControlName="password"
-          placeholder="••••••••"
+          [placeholder]="'auth.login.password.placeholder' | translate"
         />
         <span *ngIf="form.controls.password.invalid && form.controls.password.touched">
-          Password is required.
+          {{ 'auth.login.password.error' | translate }}
         </span>
       </div>
 
       <button type="submit" [disabled]="loading || form.invalid">
-        <span *ngIf="!loading">Sign in</span>
+        <span *ngIf="!loading">{{ 'auth.login.submit' | translate }}</span>
         <span *ngIf="loading" class="spinner"></span>
       </button>
 
-      <p *ngIf="error" class="error-message">{{ error }}</p>
+      <p *ngIf="errorKey" class="error-message">
+        {{ errorKey | translate }}
+      </p>
     </form>
   </div>
 </div>
