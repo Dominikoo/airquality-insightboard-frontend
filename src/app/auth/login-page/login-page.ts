@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   ReactiveFormsModule,
@@ -36,7 +36,8 @@ export class LoginPage {
   constructor(
     private auth: AuthService,
     private router: Router,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private cdr: ChangeDetectorRef,
   ) {
     this.currentLang = this.translate.currentLang || 'en';
   }
@@ -47,17 +48,22 @@ export class LoginPage {
     this.loading = true;
     this.errorKey = undefined;
 
-    this.auth.login(this.form.getRawValue()).subscribe({
-      next: () => {
+    this.auth.login(this.form.getRawValue())
+      .subscribe({
+        next: () => {
+          this.router.navigate(['/air-quality']);
+        },
+        error: (err) => {
+          console.error('LOGIN FAILED:', err);
+          this.errorKey = 'auth.login.error.invalidCredentials';
+        }
+      })
+      .add(() => {
         this.loading = false;
-        this.router.navigate(['/air-quality']);
-      },
-      error: () => {
-        this.loading = false;
-        this.errorKey = 'auth.login.error.invalidCredentials';
-      },
-    });
+        this.cdr.detectChanges();
+      });
   }
+
 
   switchLang(lang: 'en' | 'pl') {
     this.currentLang = lang;
