@@ -10,7 +10,7 @@ export interface LoginPayload {
 }
 
 export interface LoginResponse {
-  token: string;
+  accessToken: string;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -27,7 +27,7 @@ export class AuthService {
       .post<LoginResponse>(`${this.baseUrl}/login`, credentials)
       .pipe(
         tap((res) => {
-          this.tokenStorage.token = res.token;
+          this.tokenStorage.token = res.accessToken;
         })
       );
   }

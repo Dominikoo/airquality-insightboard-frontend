@@ -9,3 +9,48 @@ html, body {
 
     color: #1f2937;
 }
+
+.city-marker {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--color);
+    box-shadow:
+      0 0 0 2px rgba(255, 255, 255, 0.8),
+      0 0 12px var(--color);
+    cursor: pointer;
+    transition: transform .15s ease, box-shadow .15s ease;
+
+    &:hover {
+      transform: scale(1.25);
+      box-shadow:
+        0 0 0 3px rgba(255, 255, 255, 1),
+        0 0 14px var(--color);
+    }
+}
+
+.tooltip {
+    color: black;
+    font-size: 14px;
+    line-height: 1.4;
+    min-width: 160px;
+}
+
+.tooltip .aq-row {
+    display: flex;
+    justify-content: space-between;
+    margin: 2px 0;
+}
+
+.tooltip .aq-label {
+    font-weight: 500;
+}
+
+.tooltip .aq-value {
+    text-align: right;
+    min-width: 60px;
+}
+
+.tooltip .aqi-value-right {
+    font-weight: 600;
+}
